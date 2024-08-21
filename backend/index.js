@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const { connectDB } = require("../src/config/db");
-const { PORT } = require("../src/config/env");
+const { connectDB } = require("./src/config/db");
+const { PORT } = require("./src/config/env");
 
 const app = express();
 
