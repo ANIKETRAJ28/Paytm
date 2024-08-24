@@ -15,7 +15,9 @@ class UserRepository {
             const id = newUser._id;
             const token = jwt.sign({
                 id
-            }, JWT_SECRET);
+            }, JWT_SECRET, {
+                expiresIn: "24h"
+            });
             return token;
         } catch (error) {
             console.log("error in repository");
@@ -35,8 +37,20 @@ class UserRepository {
             const id = check_user._id;
             const token = jwt.sign({
                 id
-            }, JWT_SECRET);
+            }, JWT_SECRET, {
+                expiresIn: "24h"
+            });
             return token;
+        } catch (error) {
+            console.log("error in repository");
+            throw(error);
+        }
+    }
+
+    async update(id, data) {
+        try {
+            const user = await User.findByIdAndUpdate(id, data);
+            await user.save();
         } catch (error) {
             console.log("error in repository");
             throw(error);

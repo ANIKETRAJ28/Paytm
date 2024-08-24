@@ -24,6 +24,16 @@ class UserService {
             throw error;
         }
     } 
+
+    async update(id, data) {
+        try {
+            const response = await this.userRepository.update(id, data);
+            return response;
+        } catch (error) {
+            console.log("error in services");
+            throw error;
+        }
+    } 
 }
 
 module.exports = UserService;

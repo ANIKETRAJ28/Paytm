@@ -1,7 +1,7 @@
 const zod = require("zod");
 const { StatusCodes } = require("http-status-codes");
 
-const validateUser = (req, res, next) => {
+const validateSignUp = (req, res, next) => {
     const userSchema = zod.object({ // zod object for validation
         username: zod.string(),
         password: zod.string(),
@@ -25,7 +25,7 @@ const validateUser = (req, res, next) => {
                 }
             })
         } else if(validate.error.issues[0].path[0] == "username") {
-            return res.status(401).json({
+            return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
                 message: "Authentication failed",
                 data: {},
@@ -34,7 +34,7 @@ const validateUser = (req, res, next) => {
                 }
             });
         } else {
-            return res.status(401).json({
+            return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
                 message: "Authentication failed",
                 data: {},
@@ -48,7 +48,7 @@ const validateUser = (req, res, next) => {
     next();
 }
 
-const validateSignin = (req, res, next) => {
+const validateSignIn = (req, res, next) => {
     const userSchema = zod.object({ // zod object for validation
         username: zod.string(),
         password: zod.string(),
@@ -70,7 +70,7 @@ const validateSignin = (req, res, next) => {
                 }
             })
         } else {
-            return res.status(401).json({
+            return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
                 message: "Authentication failed",
                 data: {},
@@ -84,7 +84,26 @@ const validateSignin = (req, res, next) => {
     next();
 }
 
+const validateUpdateUser = (req, res, next) => {
+    if(!req.body.username &&
+        !req.body.firstname &&
+        !req.body.lastname &&
+        !req.body.password
+    ) return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Nothing to update",
+        data: {},
+        error: {
+            message: "No arguments for updation"
+        }
+    });
+    const requestObj = {username: req.body?.username, password: req.body?.password, firstname: req.body?.firstname, lastname: req.body?.lastname};
+    req.user = requestObj;
+    next();
+}
+
 module.exports = {
-    validateUser,
-    validateSignin
+    validateSignUp,
+    validateSignIn,
+    validateUpdateUser
 };

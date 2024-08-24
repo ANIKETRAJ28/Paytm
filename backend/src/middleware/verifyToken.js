@@ -18,8 +18,9 @@ const verifyToken = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     try {
         const decode = jwt.verify(token, JWT_SECRET);
-        if(decode.userId) {
-            req.userId = decode.userId
+        if(decode.id) {
+            req.id = decode.id
+            next();
         } else {
             return res.status(StatusCodes.UNAUTHORIZED).json({
                 success: false,
@@ -40,4 +41,8 @@ const verifyToken = (req, res, next) => {
             }
         });
     }
+}
+
+module.exports = {
+    verifyToken
 }

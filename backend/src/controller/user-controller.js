@@ -46,7 +46,29 @@ const signin = async(req, res) => {
     }
 }
 
+const update = async(req, res) => {
+    try {
+        const response = await userService.update(req.id, req.user);
+        return res.status(StatusCodes.CREATED).json({
+            success: true,
+            message: "Successfully updated the user",
+            data: response,
+            error: {}
+        });
+    } catch (error) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            success: false,
+            message: "Cannot cannot the user",
+            data: {},
+            error: {
+                message: error
+            }
+        });
+    }
+}
+
 module.exports = {
     create,
-    signin
+    signin,
+    update
 }
