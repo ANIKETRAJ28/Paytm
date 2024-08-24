@@ -14,6 +14,16 @@ class UserService {
             throw error;
         }
     } 
+
+    async signin(user) {
+        try {
+            const response = await this.userRepository.signin(user);
+            return response;
+        } catch (error) {
+            console.log("error in services");
+            throw error;
+        }
+    } 
 }
 
 module.exports = UserService;

@@ -2,9 +2,10 @@ const express = require("express");
 
 const route = express.Router();
 
-const { validateUser } = require("../../middleware/validateUser");
-const { create } = require("../../controller/crud-controller");
+const { validateUser, validateSignin } = require("../../middleware/validateUser");
+const { create, signin } = require("../../controller/user-controller");
 
-route.post("/create", validateUser, create);
+route.post("/signup", validateUser, create);
+route.post("/signin", validateSignin, signin);
 
 module.exports = route;
