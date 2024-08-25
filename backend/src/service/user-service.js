@@ -34,6 +34,18 @@ class UserService {
             throw error;
         }
     } 
+
+    async filter(id, search) {
+        try {
+            const regex = (pattern) => new RegExp(`.*${pattern}.*`);
+            const filter = regex(search);
+            const response = await this.userRepository.filter(id, filter);
+            return response;
+        } catch (error) {
+            console.log("error in services");
+            throw error;
+        }
+    }
 }
 
 module.exports = UserService;

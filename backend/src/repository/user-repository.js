@@ -56,6 +56,22 @@ class UserRepository {
             throw(error);
         }
     }
+
+    async filter(id, filter) {
+        try {
+            let users = await User.find({
+                $or: [
+                    { username: { $regex: filter, $options: "i" } },
+                    { firstname: { $regex: filter, $options: "i" } },
+                    { lastname: { $regex: filter, $options: "i" } },
+                ],
+            });
+            users = users.filter(user => user._id != id);
+            return users;
+        } catch (error) {
+            
+        }
+    }
 }
 
 module.exports = UserRepository;

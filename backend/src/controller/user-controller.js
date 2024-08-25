@@ -67,8 +67,30 @@ const update = async(req, res) => {
     }
 }
 
+const filter = async(req, res) => {
+    try {
+        const response = await userService.filter(req.id, req.query.filter);
+        res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Successfully filtered the user",
+            data: response,
+            error: {}
+        })
+    } catch (error) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            success: false,
+            message: "Cannot filter the user",
+            data: {},
+            error: {
+                message: error
+            }
+        });
+    }
+}
+
 module.exports = {
     create,
     signin,
-    update
+    update,
+    filter
 }

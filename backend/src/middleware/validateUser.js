@@ -84,6 +84,18 @@ const validateSignIn = (req, res, next) => {
     next();
 }
 
+const validateFilterUser = (req, res, next) => {
+    if(!req.query.filter) return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Search filter not found",
+        data: {},
+        error: {
+            message: "Search filter missing"
+        }
+    });
+    next();
+} 
+
 const validateUpdateUser = (req, res, next) => {
     if(!req.body.username &&
         !req.body.firstname &&
@@ -105,5 +117,6 @@ const validateUpdateUser = (req, res, next) => {
 module.exports = {
     validateSignUp,
     validateSignIn,
-    validateUpdateUser
+    validateUpdateUser,
+    validateFilterUser
 };
