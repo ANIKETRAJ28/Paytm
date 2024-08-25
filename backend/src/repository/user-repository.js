@@ -67,6 +67,9 @@ class UserRepository {
                 ],
             });
             users = users.filter(user => user._id != id);
+            users = users.map(user => {
+                return {_id: user._id, username: user.username, firstname: user.firstname, lastname: user.lastname}
+            });
             return users;
         } catch (error) {
             

@@ -65,6 +65,31 @@
     "error": {}
   }
   ```
+#### search
+- request
+  ```
+  {
+    username: ?
+    firstname: ?
+    lastname: ?
+  }
+  ```
+- response
+  ```
+  {
+    "success": true,
+    "message": "Successfully filtered the user",
+    "data": [
+      {
+        "_id": <user_id>,
+        "username": <user_username>,
+        "firstname": <user_firstname>,
+        "lastname": <user_lastname>
+      },
+    ],
+    "error": {}
+  }
+  ```
 
 
 ## FRONTEND
