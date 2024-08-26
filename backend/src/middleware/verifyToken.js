@@ -8,7 +8,6 @@ const verifyToken = (req, res, next) => {
     if(!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.status(StatusCodes.BAD_REQUEST).json({
             success: false,
-            message: "Token not found",
             data: {},
             error: {
                 message: "Bearer Token missing"
@@ -24,7 +23,6 @@ const verifyToken = (req, res, next) => {
         } else {
             return res.status(StatusCodes.UNAUTHORIZED).json({
                 success: false,
-                message: "Token expired",
                 data: {},
                 error: {
                     message: "Session expired"
@@ -34,7 +32,6 @@ const verifyToken = (req, res, next) => {
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
-            message: "Internal server error",
             data: {},
             error: {
                 message: "Internal server error"

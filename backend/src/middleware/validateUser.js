@@ -18,7 +18,6 @@ const validateSignUp = (req, res, next) => {
         if(validate.error.issues[0].path[0] == "password") {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
-                message: "Authentication failed",
                 data: {},
                 error: {
                     message: "Password missing"
@@ -27,7 +26,6 @@ const validateSignUp = (req, res, next) => {
         } else if(validate.error.issues[0].path[0] == "username") {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
-                message: "Authentication failed",
                 data: {},
                 error: {
                     message: "Username missing"
@@ -36,7 +34,6 @@ const validateSignUp = (req, res, next) => {
         } else {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
-                message: "Authentication failed",
                 data: {},
                 error: {
                     message: "First name or last name missing"
@@ -63,7 +60,6 @@ const validateSignIn = (req, res, next) => {
         if(validate.error.issues[0].path[0] == "password") {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
-                message: "Authentication failed",
                 data: {},
                 error: {
                     message: "Password missing"
@@ -72,7 +68,6 @@ const validateSignIn = (req, res, next) => {
         } else {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
-                message: "Authentication failed",
                 data: {},
                 error: {
                     message: "Username missing"
@@ -87,7 +82,6 @@ const validateSignIn = (req, res, next) => {
 const validateFilterUser = (req, res, next) => {
     if(!req.query.filter) return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
-        message: "Search filter not found",
         data: {},
         error: {
             message: "Search filter missing"
@@ -103,7 +97,6 @@ const validateUpdateUser = (req, res, next) => {
         !req.body.password
     ) return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
-        message: "Nothing to update",
         data: {},
         error: {
             message: "No arguments for updation"
