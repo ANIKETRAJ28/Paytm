@@ -1,9 +1,10 @@
 import './App.css'
+import MainRoute from './Routes/MainRoute'
 
 function App() {
 
   return (
-    <>Hello</>
+    <MainRoute/>
   )
 }
 
